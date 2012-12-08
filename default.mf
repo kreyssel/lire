@@ -1,3 +1,0 @@
-Build-Date: 29.11.2012 05:17 PM
-            Build-Number: 142
-        
