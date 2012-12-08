@@ -30,17 +30,20 @@ public class LocalitySensitiveHashing {
      */
     public static void generateHashFunctions() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));
-        oos.writeInt(dimensions);
-        oos.writeInt(numFunctionBundles);
-        for (int c = 0; c < numFunctionBundles; c++) {
-            oos.writeDouble(Math.random() * binLength);
-        }
-        for (int c = 0; c < numFunctionBundles; c++) {
-            for (int j = 0; j < dimensions; j++) {
-                oos.writeDouble(drawNumber() * dilation);
-            }
-        }
-        oos.close();
+        try {
+	        oos.writeInt(dimensions);
+	        oos.writeInt(numFunctionBundles);
+	        for (int c = 0; c < numFunctionBundles; c++) {
+	            oos.writeDouble(Math.random() * binLength);
+	        }
+	        for (int c = 0; c < numFunctionBundles; c++) {
+	            for (int j = 0; j < dimensions; j++) {
+	                oos.writeDouble(drawNumber() * dilation);
+	            }
+	        }
+	    } finally {
+	    	oos.close();
+	    }
     }
 
     /**
@@ -51,21 +54,28 @@ public class LocalitySensitiveHashing {
      * @see net.semanticmetadata.lire.indexing.LocalitySensitiveHashing#generateHashFunctions()
      */
     public static double[][] readHashFunctions() throws IOException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name));
-        int dimensions = ois.readInt();
-        int numFunctionBundles = ois.readInt();
-        double[] tmpB = new double[numFunctionBundles];
-        for (int k = 0; k < numFunctionBundles; k++) {
-            tmpB[k] = ois.readDouble();
+    	double[][] hashFunctions;
+    	
+    	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name));
+        try {
+	        int dimensions = ois.readInt();
+	        int numFunctionBundles = ois.readInt();
+	        double[] tmpB = new double[numFunctionBundles];
+	        for (int k = 0; k < numFunctionBundles; k++) {
+	            tmpB[k] = ois.readDouble();
+	        }
+	        LocalitySensitiveHashing.hashB = tmpB;
+	        hashFunctions = new double[numFunctionBundles][dimensions];
+	        for (int i = 0; i < hashFunctions.length; i++) {
+	            double[] functionBundle = hashFunctions[i];
+	            for (int j = 0; j < functionBundle.length; j++) {
+	                functionBundle[j] = ois.readDouble();
+	            }
+	        }
+        } finally {
+        	ois.close();
         }
-        LocalitySensitiveHashing.hashB = tmpB;
-        double[][] hashFunctions = new double[numFunctionBundles][dimensions];
-        for (int i = 0; i < hashFunctions.length; i++) {
-            double[] functionBundle = hashFunctions[i];
-            for (int j = 0; j < functionBundle.length; j++) {
-                functionBundle[j] = ois.readDouble();
-            }
-        }
+        
         LocalitySensitiveHashing.hashA = hashFunctions;
         return hashFunctions;
     }

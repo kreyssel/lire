@@ -109,19 +109,23 @@ public class HashingTest extends TestCase {
 
     public void testReadHashFunctions() throws IOException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("hashFunctions.obj"));
-        int bits = ois.readInt();
-        int dimensions = ois.readInt();
-        int numFunctionBundles = ois.readInt();
-
-        float[][][] hashFunctions = new float[numFunctionBundles][bits][dimensions];
-        for (int i = 0; i < hashFunctions.length; i++) {
-            float[][] functionBundle = hashFunctions[i];
-            for (int j = 0; j < functionBundle.length; j++) {
-                float[] bitFunctions = functionBundle[j];
-                for (int k = 0; k < bitFunctions.length; k++) {
-                    bitFunctions[k] = ois.readFloat();
-                }
-            }
+        try { 
+	        int bits = ois.readInt();
+	        int dimensions = ois.readInt();
+	        int numFunctionBundles = ois.readInt();
+	
+	        float[][][] hashFunctions = new float[numFunctionBundles][bits][dimensions];
+	        for (int i = 0; i < hashFunctions.length; i++) {
+	            float[][] functionBundle = hashFunctions[i];
+	            for (int j = 0; j < functionBundle.length; j++) {
+	                float[] bitFunctions = functionBundle[j];
+	                for (int k = 0; k < bitFunctions.length; k++) {
+	                    bitFunctions[k] = ois.readFloat();
+	                }
+	            }
+	        }
+        } finally {
+        	ois.close();
         }
     }
 }

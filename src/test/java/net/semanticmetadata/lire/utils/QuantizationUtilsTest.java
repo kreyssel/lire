@@ -6,7 +6,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**

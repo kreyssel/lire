@@ -34,17 +34,20 @@ public class HashingUtils {
      */
     public static void generateHashFunctions() throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(name));
-        oos.writeInt(bits);
-        oos.writeInt(dimensions);
-        oos.writeInt(numFunctionBundles);
-        for (int c = 0; c < numFunctionBundles; c++) {
-            for (int i = 0; i < bits; i++) {
-                for (int j = 0; j < dimensions; j++) {
-                    oos.writeFloat((float) (Math.random() * 8d - 4d));
-                }
-            }
+        try {
+	        oos.writeInt(bits);
+	        oos.writeInt(dimensions);
+	        oos.writeInt(numFunctionBundles);
+	        for (int c = 0; c < numFunctionBundles; c++) {
+	            for (int i = 0; i < bits; i++) {
+	                for (int j = 0; j < dimensions; j++) {
+	                    oos.writeFloat((float) (Math.random() * 8d - 4d));
+	                }
+	            }
+	        }
+        } finally {
+        	oos.close();
         }
-        oos.close();
     }
 
     /**
@@ -55,21 +58,28 @@ public class HashingUtils {
      * @throws IOException
      */
     public static float[][][] readHashFunctions() throws IOException {
+    	float[][][] hashFunctions;
+    	
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(name));
-        int bits = ois.readInt();
-        int dimensions = ois.readInt();
-        int numFunctionBundles = ois.readInt();
-
-        float[][][] hashFunctions = new float[numFunctionBundles][bits][dimensions];
-        for (int i = 0; i < hashFunctions.length; i++) {
-            float[][] functionBundle = hashFunctions[i];
-            for (int j = 0; j < functionBundle.length; j++) {
-                float[] bitFunctions = functionBundle[j];
-                for (int k = 0; k < bitFunctions.length; k++) {
-                    bitFunctions[k] = ois.readFloat();
-                }
-            }
-        }
+        try {
+	        int bits = ois.readInt();
+	        int dimensions = ois.readInt();
+	        int numFunctionBundles = ois.readInt();
+	
+	        hashFunctions = new float[numFunctionBundles][bits][dimensions];
+	        for (int i = 0; i < hashFunctions.length; i++) {
+	            float[][] functionBundle = hashFunctions[i];
+	            for (int j = 0; j < functionBundle.length; j++) {
+	                float[] bitFunctions = functionBundle[j];
+	                for (int k = 0; k < bitFunctions.length; k++) {
+	                    bitFunctions[k] = ois.readFloat();
+	                }
+	            }
+	        }
+	    } finally {
+	    	ois.close();
+	    }
+        
         HashingUtils.hashes = hashFunctions;
         return hashFunctions;
     }

@@ -2,8 +2,6 @@ package net.semanticmetadata.lire.imageanalysis;
 
 import junit.framework.TestCase;
 
-import java.util.HashMap;
-
 /**
  * User: mlux
  * Date: 09.10.12
