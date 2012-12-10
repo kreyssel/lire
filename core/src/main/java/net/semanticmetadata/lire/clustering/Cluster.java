@@ -124,26 +124,34 @@ public class Cluster implements Comparable<Object> {
 
     public static void writeClusters(Cluster[] clusters, String file) throws IOException {
         FileOutputStream fout = new FileOutputStream(file);
-        fout.write(SerializationUtils.toBytes(clusters.length));
-        for (int i = 0; i < clusters.length; i++) {
-            fout.write(clusters[i].getByteRepresentation());
+        try {
+	        fout.write(SerializationUtils.toBytes(clusters.length));
+	        for (int i = 0; i < clusters.length; i++) {
+	            fout.write(clusters[i].getByteRepresentation());
+	        }
+        } finally{
+        	fout.close();
         }
-        fout.close();
     }
 
     public static Cluster[] readClusters(String file) throws IOException {
+    	Cluster[] result;
+    	
         FileInputStream fin = new FileInputStream(file);
-        byte[] tmp = new byte[4];
-        fin.read(tmp, 0, 4);
-        Cluster[] result = new Cluster[SerializationUtils.toInt(tmp)];
-        tmp = new byte[128 * 4];
-        for (int i = 0; i < result.length; i++) {
-            int bytesRead = fin.read(tmp, 0, 128 * 4);
-            if (bytesRead != 128 * 4) System.err.println("Didn't read enough bytes ...");
-            result[i] = new Cluster();
-            result[i].setByteRepresentation(tmp);
+        try {
+	        byte[] tmp = new byte[4];
+	        fin.read(tmp, 0, 4);
+	        result = new Cluster[SerializationUtils.toInt(tmp)];
+	        tmp = new byte[128 * 4];
+	        for (int i = 0; i < result.length; i++) {
+	            int bytesRead = fin.read(tmp, 0, 128 * 4);
+	            if (bytesRead != 128 * 4) System.err.println("Didn't read enough bytes ...");
+	            result[i] = new Cluster();
+	            result[i].setByteRepresentation(tmp);
+	        }
+        } finally {
+        	fin.close();
         }
-        fin.close();
         return result;
     }
 

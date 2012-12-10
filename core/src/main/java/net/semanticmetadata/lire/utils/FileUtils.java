@@ -164,12 +164,15 @@ public class FileUtils {
                 zipDirectory(files[i], base, zos);
             } else {
                 FileInputStream in = new FileInputStream(files[i]);
-                ZipEntry entry = new ZipEntry(files[i].getPath().substring(base.getPath().length() + 1));
-                zos.putNextEntry(entry);
-                while (-1 != (read = in.read(buffer))) {
-                    zos.write(buffer, 0, read);
+                try {
+	                ZipEntry entry = new ZipEntry(files[i].getPath().substring(base.getPath().length() + 1));
+	                zos.putNextEntry(entry);
+	                while (-1 != (read = in.read(buffer))) {
+	                    zos.write(buffer, 0, read);
+	                }
+                } finally {
+                	in.close();
                 }
-                in.close();
             }
         }
     }
