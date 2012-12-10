@@ -31,6 +31,7 @@
 package net.semanticmetadata.lire.benchmarking;
 
 import junit.framework.TestCase;
+import net.semanticmetadata.lire.DocumentBuilderUtils;
 import net.semanticmetadata.lire.imageanalysis.bovw.SurfFeatureHistogramBuilder;
 import net.semanticmetadata.lire.impl.ChainedDocumentBuilder;
 import net.semanticmetadata.lire.impl.ColorLayoutDocumentBuilder;
@@ -72,7 +73,7 @@ public class CombinationTest extends TestCase {
         int count = 0;
         long time = System.currentTimeMillis();
         for (String identifier : images) {
-            Document doc = cb.createDocument(new FileInputStream(identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(cb, identifier, identifier);
             iw.addDocument(doc);
             count++;
             if (count % 100 == 0) System.out.println(count + " files indexed.");

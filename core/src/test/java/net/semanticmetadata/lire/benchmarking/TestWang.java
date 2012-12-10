@@ -32,6 +32,7 @@ package net.semanticmetadata.lire.benchmarking;
 
 import junit.framework.TestCase;
 import net.semanticmetadata.lire.DocumentBuilder;
+import net.semanticmetadata.lire.DocumentBuilderUtils;
 import net.semanticmetadata.lire.ImageSearchHits;
 import net.semanticmetadata.lire.ImageSearcher;
 import net.semanticmetadata.lire.ImageSearcherFactory;
@@ -159,7 +160,7 @@ public class TestWang extends TestCase {
         int count = 0;
         long time = System.currentTimeMillis();
         for (String identifier : images) {
-            Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
             iw.addDocument(doc);
             count++;
             if (count % 100 == 0) System.out.println(count + " files indexed.");

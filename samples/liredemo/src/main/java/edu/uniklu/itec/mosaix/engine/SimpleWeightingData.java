@@ -9,7 +9,7 @@ import com.drew.metadata.exif.ExifReader;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.WeakHashMap;
 
@@ -115,10 +115,9 @@ public final class SimpleWeightingData implements WeightingData {
      */
     private BufferedImage readFile() throws IOException {
         BufferedImage image = null;
-        FileInputStream jpegFile = new FileInputStream(id_);
         Metadata metadata = new Metadata();
         try {
-            new ExifReader(jpegFile).extract(metadata);
+            new ExifReader(new File(id_)).extract(metadata);
             byte[] thumb = ((ExifDirectory) metadata.getDirectory(ExifDirectory.class)).getThumbnailData();
             if (thumb != null) image = ImageIO.read(new ByteArrayInputStream(thumb));
         } catch (JpegProcessingException e) {
@@ -130,7 +129,7 @@ public final class SimpleWeightingData implements WeightingData {
         }
         // Fallback:
         if (image == null) {
-            image = ImageIO.read(new FileInputStream(id_));
+            image = ImageIO.read(new File(id_));
             // System.out.println("Could not read thumbnail.");
         }
         return image;

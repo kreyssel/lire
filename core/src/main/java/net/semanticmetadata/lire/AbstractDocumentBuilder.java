@@ -53,7 +53,7 @@ public abstract class AbstractDocumentBuilder implements DocumentBuilder {
      * (e.g. the file name or the url of the image). This is a simple implementation using
      * javax.imageio.ImageIO
      *
-     * @param image      the image to index. Please note that
+     * @param image      the image to index. Please note that. The stream will not been closed.
      * @param identifier an id for the image, for instance the filename or an URL.
      * @return a Lucene Document containing the indexed image.
      * @see javax.imageio.ImageIO

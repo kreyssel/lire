@@ -86,7 +86,7 @@ public class CreateIndexTest extends TestCase {
         IndexWriter iw = LuceneUtils.createIndexWriter(indexPath + "-small", true);
         for (String identifier : testFiles) {
             System.out.println("Indexing file " + identifier);
-            Document doc = builder.createDocument(new FileInputStream(testFilesPath + identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, testFilesPath + identifier, identifier);
             iw.addDocument(doc);
         }
         iw.close();
@@ -100,7 +100,7 @@ public class CreateIndexTest extends TestCase {
         IndexWriter iw = LuceneUtils.createIndexWriter(indexPath + "-small", true);
         long ms = System.currentTimeMillis();
         for (String identifier : testFiles) {
-            Document doc = builder.createDocument(new FileInputStream(testFilesPath + identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, testFilesPath + identifier, identifier);
             iw.addDocument(doc);
         }
         System.out.println("Time taken: " + ((System.currentTimeMillis() - ms) / testFiles.length) + " ms");
@@ -112,7 +112,7 @@ public class CreateIndexTest extends TestCase {
         DocumentBuilder builder = DocumentBuilderFactory.getCEDDDocumentBuilder();
         IndexWriter iw = LuceneUtils.createIndexWriter("wang-cedd", true);
         for (String identifier : images) {
-            Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
             iw.addDocument(doc);
         }
         iw.close();
@@ -131,7 +131,7 @@ public class CreateIndexTest extends TestCase {
         long time = System.currentTimeMillis();
         for (String identifier : images) {
             try {
-                Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
+                Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
                 iw.addDocument(doc);
             } catch (Exception e) {
                 System.err.println("Error indexing file: " + identifier + "(" + e.getMessage() + ")");
@@ -207,7 +207,7 @@ public class CreateIndexTest extends TestCase {
 
         public void run() {
             try {
-                Document doc = builder.createDocument(new FileInputStream(file), file);
+                Document doc = DocumentBuilderUtils.createDocument(builder, file, file);
                 synchronizedWriter.addDocument(doc);
             } catch (Exception e) {
                 System.err.println("Error indexing file: " + file + "(" + e.getMessage() + ")");

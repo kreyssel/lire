@@ -32,6 +32,7 @@ package net.semanticmetadata.lire.indexing;
 
 import junit.framework.TestCase;
 import net.semanticmetadata.lire.DocumentBuilder;
+import net.semanticmetadata.lire.DocumentBuilderUtils;
 import net.semanticmetadata.lire.imageanalysis.bovw.SurfFeatureHistogramBuilder;
 import net.semanticmetadata.lire.impl.ChainedDocumentBuilder;
 import net.semanticmetadata.lire.impl.SurfDocumentBuilder;
@@ -98,7 +99,7 @@ public class IndexVisualWordsTest extends TestCase {
         int count = 0;
         long time = System.currentTimeMillis();
         for (String identifier : images) {
-            Document doc = documentBuilder.createDocument(new FileInputStream(identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(documentBuilder, identifier, identifier);
             iw.addDocument(doc);
             count++;
             if (count % 500 == 0) System.out.println(count + " files indexed.");

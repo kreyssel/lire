@@ -34,6 +34,7 @@ import junit.framework.TestCase;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
@@ -47,7 +48,7 @@ public class FuzzyColorHistogramTest extends TestCase {
 
     public void testExtraction() throws IOException {
         JpegCoefficientHistogram acc = new JpegCoefficientHistogram();
-        BufferedImage image = ImageIO.read(new FileInputStream(testFilesPath + testFiles[0]));
+        BufferedImage image = ImageIO.read(new File(testFilesPath + testFiles[0]));
         System.out.println("image = " + image.getWidth() + " x " + image.getHeight());
         acc.extract(image);
         System.out.println("acc = " + acc.getStringRepresentation());
@@ -60,7 +61,7 @@ public class FuzzyColorHistogramTest extends TestCase {
             System.out.println("id = " + id + ": ");
             String file = testExtensive + "/" + id + ".jpg";
             JpegCoefficientHistogram acc = new JpegCoefficientHistogram();
-            BufferedImage image = ImageIO.read(new FileInputStream(file));
+            BufferedImage image = ImageIO.read(new File(file));
             ms = System.currentTimeMillis();
             acc.extract(image);
             ms = System.currentTimeMillis() - ms;
@@ -78,7 +79,7 @@ public class FuzzyColorHistogramTest extends TestCase {
             System.out.println("id = " + id + ": ");
             String file = testExtensive + "/" + id + ".jpg";
             JpegCoefficientHistogram acc = new JpegCoefficientHistogram();
-            BufferedImage image = ImageIO.read(new FileInputStream(file));
+            BufferedImage image = ImageIO.read(new File(file));
             acc.extract(image);
         }
     }
@@ -89,7 +90,7 @@ public class FuzzyColorHistogramTest extends TestCase {
         for (int i = 0; i < acc.length; i++) {
             System.out.println("Extracting from number " + i);
             acc[i] = new JpegCoefficientHistogram();
-            acc[i].extract(ImageIO.read(new FileInputStream(testFilesPath + testFiles[i])));
+            acc[i].extract(ImageIO.read(new File(testFilesPath + testFiles[i])));
             vds.add(acc[i].getStringRepresentation());
         }
 

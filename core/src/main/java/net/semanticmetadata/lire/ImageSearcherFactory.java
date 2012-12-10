@@ -42,8 +42,7 @@ import net.semanticmetadata.lire.impl.GenericFastImageSearcher;
  * <pre>
  * IndexReader reader = IndexReader.open(indexPath);
  * ImageSearcher searcher = ImageSearcherFactory.createDefaultSearcher();
- * FileInputStream imageStream = new FileInputStream("image.jpg");
- * BufferedImage bimg = ImageIO.read(imageStream);
+ * BufferedImage bimg = ImageIO.read(new File("image.jpg"));
  * // searching for an image:
  * ImageSearchHits hits = null;
  * hits = searcher.search(bimg, reader);

@@ -160,10 +160,9 @@ public class ParallelIndexer implements Runnable {
         private BufferedImage readFile(String path) throws IOException {
             BufferedImage image = null;
             if (path.toLowerCase().endsWith(".jpg")) {
-                FileInputStream jpegFile = new FileInputStream(path);
                 Metadata metadata = new Metadata();
                 try {
-                    new ExifReader(jpegFile).extract(metadata);
+                    new ExifReader(new File(path)).extract(metadata);
 //                    byte[] thumb = ((ExifDirectory) metadata.getDirectory(ExifDirectory.class)).getThumbnailData();
 //                    if (thumb != null) image = ImageIO.read(new ByteArrayInputStream(thumb));
 //                    System.out.print("Read from thumbnail data ... ");
@@ -175,7 +174,6 @@ public class ParallelIndexer implements Runnable {
                     System.err.println("Could not extract EXIF data for " + path);
                     System.err.println("\t" + e.getMessage());
                 }
-                jpegFile.close();    // patch by Simon Micollier
             }
             // Fallback & PNGs:
             if (image == null)

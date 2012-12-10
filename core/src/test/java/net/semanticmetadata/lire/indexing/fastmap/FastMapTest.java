@@ -32,6 +32,7 @@ package net.semanticmetadata.lire.indexing.fastmap;
 import junit.framework.TestCase;
 import net.semanticmetadata.lire.DocumentBuilder;
 import net.semanticmetadata.lire.DocumentBuilderFactory;
+import net.semanticmetadata.lire.DocumentBuilderUtils;
 import net.semanticmetadata.lire.imageanalysis.*;
 import org.apache.lucene.document.Document;
 
@@ -63,7 +64,7 @@ public class FastMapTest extends TestCase {
         docs = new LinkedList<Document>();
         for (String file : testFiles) {
             try {
-                docs.add(db.createDocument(new FileInputStream(testFilesPath + file), file));
+                docs.add(DocumentBuilderUtils.createDocument(db, testFilesPath + file, file));
             } catch (IOException e) {
                 fail(e.getMessage());
             }

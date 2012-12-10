@@ -35,6 +35,8 @@ import net.semanticmetadata.lire.impl.MSERDocumentBuilder;
 import org.apache.lucene.document.Document;
 
 import javax.imageio.ImageIO;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -49,7 +51,7 @@ public class MSERTest extends TestCase {
     public void testMSERExtraction() throws IOException {
         MSERDocumentBuilder db = new MSERDocumentBuilder();
         String file = "./wang-1000/199.jpg";
-        Document document = db.createDocument(ImageIO.read(new FileInputStream(file)), file);
+        Document document = db.createDocument(ImageIO.read(new File(file)), file);
 //        byte[][] binaryValues = document.getBinaryValues(DocumentBuilder.FIELD_NAME_MSER);
 //        System.out.println("binaryValues.length = " + binaryValues.length);
 //

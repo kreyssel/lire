@@ -130,9 +130,9 @@ public class TestGeneral extends TestCase {
             // TODO: local features ...
             Document doc = null;
             if (cutImages) {
-                BufferedImage bimg = ImageUtils.cropImage(ImageIO.read(new FileInputStream(identifier)), 0, 0, 200, 69);
+                BufferedImage bimg = ImageUtils.cropImage(ImageIO.read(new File(identifier)), 0, 0, 200, 69);
                 doc = builder.createDocument(bimg, identifier);
-            } else doc = builder.createDocument(new FileInputStream(identifier), identifier);
+            } else doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
             iw.addDocument(doc);
             count++;
             if (count % 100 == 0) {
@@ -191,10 +191,10 @@ public class TestGeneral extends TestCase {
             queryImage = testIterator.next();
             Document query;
             if (cutImages) {
-                BufferedImage bimg = ImageUtils.cropImage(ImageIO.read(new FileInputStream(queryImage)), 0, 0, 200, 69);
-                query = builder.createDocument(new FileInputStream(queryImage), queryImage);
+                BufferedImage bimg = ImageUtils.cropImage(ImageIO.read(new File(queryImage)), 0, 0, 200, 69);
+                query = builder.createDocument(bimg, queryImage);
             } else
-                query = builder.createDocument(new FileInputStream(queryImage), queryImage);
+                query = DocumentBuilderUtils.createDocument(builder, queryImage, queryImage);
             ImageSearchHits hits = searcher.search(query, reader);
             // hits = rerank(hits, query, ColorLayout.class, DocumentBuilder.FIELD_NAME_COLORLAYOUT);
             for (int i = 0; i < hits.length(); i++) {
@@ -211,7 +211,7 @@ public class TestGeneral extends TestCase {
       IndexReader reader = IndexReader.open(SimpleFSDirectory.open(new File(testIndex)), true);
       for (Iterator<String> testIterator = testcases.keySet().iterator(); testIterator.hasNext();) {
           queryImage = testIterator.next();
-          BufferedImage bimg = ImageIO.read(new FileInputStream(queryImage));
+          BufferedImage bimg = ImageIO.read(new File(queryImage));
           if (cutImages)
               bimg = ImageUtils.cropImage(bimg, 0, 0, 200, 69);
           ColorLayout cl = new ColorLayout();

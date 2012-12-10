@@ -37,6 +37,7 @@ import net.semanticmetadata.lire.imageanalysis.correlogram.NaiveAutoCorrelogramE
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
@@ -50,7 +51,7 @@ public class AutoColorCorrelogramTest extends TestCase {
 
     public void testExtraction() throws IOException {
         AutoColorCorrelogram acc = new AutoColorCorrelogram();
-        BufferedImage image = ImageIO.read(new FileInputStream(testFilesPath + testFiles[0]));
+        BufferedImage image = ImageIO.read(new File(testFilesPath + testFiles[0]));
         System.out.println("image = " + image.getWidth() + " x " + image.getHeight());
         acc.extract(image);
         System.out.println("acc = " + acc.getStringRepresentation());
@@ -81,7 +82,7 @@ public class AutoColorCorrelogramTest extends TestCase {
         for (int j = 0; j < testSet.length; j++) {
             int id = testSet[j];
             String file = testExtensive + "/" + id + ".jpg";
-            image[j] = ImageIO.read(new FileInputStream(file));
+            image[j] = ImageIO.read(new File(file));
         }
 
 
@@ -106,7 +107,7 @@ public class AutoColorCorrelogramTest extends TestCase {
             String file = testExtensive + "/" + id + ".jpg";
             AutoColorCorrelogram acc = new AutoColorCorrelogram();
 //            OldColorCorrelogram occ = new OldColorCorrelogram(OldColorCorrelogram.Mode.SuperFast);
-            BufferedImage image = ImageIO.read(new FileInputStream(file));
+            BufferedImage image = ImageIO.read(new File(file));
 //            occ.extract(image);
             ms = System.currentTimeMillis();
             acc.extract(image);
@@ -126,7 +127,7 @@ public class AutoColorCorrelogramTest extends TestCase {
             String file = testExtensive + "/" + id + ".jpg";
             AutoColorCorrelogram acc = new AutoColorCorrelogram();
 //            OldColorCorrelogram occ = new OldColorCorrelogram(OldColorCorrelogram.Mode.SuperFast);
-            BufferedImage image = ImageIO.read(new FileInputStream(file));
+            BufferedImage image = ImageIO.read(new File(file));
 //            occ.extract(image);
             acc.extract(image);
 //            System.out.println("the same? " + acc.getStringRepresentation().equals(occ.getStringRepresentation()));
@@ -143,7 +144,7 @@ public class AutoColorCorrelogramTest extends TestCase {
         for (int i = 0; i < acc.length; i++) {
             System.out.println("Extracting from number " + i);
             acc[i] = new AutoColorCorrelogram();
-            acc[i].extract(ImageIO.read(new FileInputStream(testFilesPath + testFiles[i])));
+            acc[i].extract(ImageIO.read(new File(testFilesPath + testFiles[i])));
             vds.add(acc[i].getStringRepresentation());
         }
 

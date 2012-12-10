@@ -44,7 +44,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 
@@ -80,8 +80,8 @@ public class MetadataBuilder extends ChainedDocumentBuilder {
         // extract available metadata:
         Metadata metadata = new Metadata();
         try {
-            new ExifReader(new FileInputStream(s)).extract(metadata);
-            new IptcReader(new FileInputStream(s)).extract(metadata);
+            new ExifReader(new File(s)).extract(metadata);
+            new IptcReader(new File(s)).extract(metadata);
             // add metadata to document:
             Iterator i = metadata.getDirectoryIterator();
             while (i.hasNext()) {
@@ -97,8 +97,6 @@ public class MetadataBuilder extends ChainedDocumentBuilder {
             }
         } catch (JpegProcessingException e) {
             System.err.println("Error reading EXIF & IPTC metadata from image file.");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
 
         return d;

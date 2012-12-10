@@ -34,6 +34,7 @@ import junit.framework.TestCase;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
@@ -45,7 +46,7 @@ public class SimpleHistogramTest extends TestCase {
 
     public void testExtraction() throws IOException {
         SimpleColorHistogram sch = new SimpleColorHistogram();
-        BufferedImage image = ImageIO.read(new FileInputStream(testFilesPath + testFiles[0]));
+        BufferedImage image = ImageIO.read(new File(testFilesPath + testFiles[0]));
         System.out.println("image = " + image.getWidth() + " x " + image.getHeight());
         sch.extract(image);
         System.out.println("sch = " + sch.getStringRepresentation());
@@ -57,7 +58,7 @@ public class SimpleHistogramTest extends TestCase {
         for (int i = 0; i < acc.length; i++) {
             System.out.println("Extracting from number " + i);
             acc[i] = new SimpleColorHistogram();
-            acc[i].extract(ImageIO.read(new FileInputStream(testFilesPath + testFiles[i])));
+            acc[i].extract(ImageIO.read(new File(testFilesPath + testFiles[i])));
             vds.add(acc[i].getStringRepresentation());
         }
 
@@ -83,7 +84,7 @@ public class SimpleHistogramTest extends TestCase {
         for (int i = 0; i < acc.length; i++) {
             System.out.println("Extracting from number " + i);
             acc[i] = new SimpleColorHistogram(SimpleColorHistogram.HistogramType.HMMD, SimpleColorHistogram.DistanceFunction.JSD);
-            acc[i].extract(ImageIO.read(new FileInputStream(testFilesPath + testFiles[i])));
+            acc[i].extract(ImageIO.read(new File(testFilesPath + testFiles[i])));
             vds.add(acc[i].getStringRepresentation());
             System.out.println("acc = " + acc[i].getStringRepresentation());
         }

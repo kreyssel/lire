@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -86,7 +87,7 @@ public class QuantizationUtilsTest extends TestCase {
     public void rgbHistogramTest() throws IOException {
         int[] histogram = new int[64];
         for (int i = 0; i < histogram.length; i++) histogram[i] = 0;
-        BufferedImage img = ImageIO.read(new FileInputStream("wang-1000/0.jpg"));
+        BufferedImage img = ImageIO.read(new File("wang-1000/0.jpg"));
         WritableRaster raster = img.getRaster();
         int[] px = new int[3];
         for (int x = 0; x < raster.getWidth(); x++) {

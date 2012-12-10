@@ -47,7 +47,7 @@ public class LocalitySensitiveHashingTest extends TestCase {
         long time = System.currentTimeMillis();
         for (String identifier : images) {
             CEDD cedd = new CEDD();
-            cedd.extract(ImageIO.read(new FileInputStream(identifier)));
+            cedd.extract(ImageIO.read(new File(identifier)));
             Document doc = new Document();
             doc.add(new Field(DocumentBuilder.FIELD_NAME_CEDD, cedd.getByteArrayRepresentation()));
             doc.add(new Field(DocumentBuilder.FIELD_NAME_IDENTIFIER, identifier, Field.Store.YES, Field.Index.NOT_ANALYZED));

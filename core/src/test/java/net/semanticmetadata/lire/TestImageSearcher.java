@@ -77,8 +77,7 @@ public class TestImageSearcher extends TestCase {
         int numDocs = reader.numDocs();
         System.out.println("numDocs = " + numDocs);
         ImageSearcher searcher = ImageSearcherFactory.createScalableColorImageSearcher(50);
-        FileInputStream imageStream = new FileInputStream(testFilesPath + testFiles[0]);
-        BufferedImage bimg = ImageIO.read(imageStream);
+        BufferedImage bimg = ImageIO.read(new File(testFilesPath + testFiles[0]));
         ImageSearchHits hits = null;
         long time = System.currentTimeMillis();
         for (int i = 0; i < numsearches; i++) {
@@ -133,8 +132,7 @@ public class TestImageSearcher extends TestCase {
         int numDocs = reader.numDocs();
         System.out.println("numDocs = " + numDocs);
         ImageSearcher searcher = ImageSearcherFactory.createAutoColorCorrelogramImageSearcher(10);
-        FileInputStream imageStream = new FileInputStream(testFilesPath + testFiles[0]);
-        BufferedImage bimg = ImageIO.read(imageStream);
+        BufferedImage bimg = ImageIO.read(new File(testFilesPath + testFiles[0]));
         ImageSearchHits hits = null;
         long time = System.currentTimeMillis();
 //        for (int i = 0; i < numsearches; i++) {
@@ -163,8 +161,7 @@ public class TestImageSearcher extends TestCase {
         int numDocs = reader.numDocs();
         System.out.println("numDocs = " + numDocs);
         ImageSearcher searcher = ImageSearcherFactory.createCEDDImageSearcher(30);
-        FileInputStream imageStream = new FileInputStream(testFilesPath + testFiles[0]);
-        BufferedImage bimg = ImageIO.read(imageStream);
+        BufferedImage bimg = ImageIO.read(new File(testFilesPath + testFiles[0]));
         ImageSearchHits hits = null;
         long time = System.currentTimeMillis();
 //        for (int i = 0; i < numsearches; i++) {
@@ -193,8 +190,7 @@ public class TestImageSearcher extends TestCase {
         int numDocs = reader.numDocs();
         System.out.println("numDocs = " + numDocs);
         ImageSearcher searcher = ImageSearcherFactory.createColorHistogramImageSearcher(30);
-        FileInputStream imageStream = new FileInputStream(testFilesPath + testFiles[0]);
-        BufferedImage bimg = ImageIO.read(imageStream);
+        BufferedImage bimg = ImageIO.read(new File(testFilesPath + testFiles[0]));
         ImageSearchHits hits = null;
         long time = System.currentTimeMillis();
 //        for (int i = 0; i < numsearches; i++) {

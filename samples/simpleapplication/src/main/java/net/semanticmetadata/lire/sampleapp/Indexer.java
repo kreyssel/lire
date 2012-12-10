@@ -13,7 +13,6 @@ import org.apache.lucene.util.Version;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -51,7 +50,7 @@ public class Indexer {
             String imageFilePath = it.next();
             System.out.println("Indexing " + imageFilePath);
             try {
-                BufferedImage img = ImageIO.read(new FileInputStream(imageFilePath));
+                BufferedImage img = ImageIO.read(new File(imageFilePath));
                 Document document = builder.createDocument(img, imageFilePath);
                 iw.addDocument(document);
             } catch (Exception e) {

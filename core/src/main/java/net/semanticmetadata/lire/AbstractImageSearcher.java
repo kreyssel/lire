@@ -55,7 +55,7 @@ public abstract class AbstractImageSearcher implements ImageSearcher {
      * {@link ImageSearcher#search(java.awt.image.BufferedImage, org.apache.lucene.index.IndexReader)},
      * the image is read using javax.imageio.ImageIO.
      *
-     * @param image  the example image to search for.
+     * @param image  the example image to search for. The stream will not been closed.
      * @param reader the IndexReader which is used to dsearch through the images.
      * @return a sorted list of hits.
      * @throws IOException in case the image could not be read from stream.

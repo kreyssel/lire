@@ -53,7 +53,7 @@ public class HashingTest extends TestCase {
         String file1 = "./wang-1000/0.jpg";
         String file2 = "./wang-1000/400.jpg";
         CEDD cedd = new CEDD();
-        BufferedImage image = ImageIO.read(new FileInputStream(file1));
+        BufferedImage image = ImageIO.read(new File(file1));
         cedd.extract(image);
 
         System.out.println("hash = " + getHash(cedd));
@@ -64,7 +64,7 @@ public class HashingTest extends TestCase {
         System.out.println("hash = " + getHash(cedd2));
 
         CEDD cedd3 = new CEDD();
-        BufferedImage image3 = ImageIO.read(new FileInputStream(file2));
+        BufferedImage image3 = ImageIO.read(new File(file2));
         cedd3.extract(image3);
         System.out.println(cedd.getDistance(cedd3));
         System.out.println("hash = " + getHash(cedd3));

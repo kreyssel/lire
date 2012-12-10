@@ -70,7 +70,7 @@ public class RuntimeTest extends TestCase {
         IndexWriter iw = LuceneUtils.createIndexWriter(indexPath + "-small", true);
         for (String identifier : testFiles) {
             System.out.println("Indexing file " + identifier);
-            Document doc = builder.createDocument(new FileInputStream(testFilesPath + identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, testFilesPath + identifier, identifier);
             iw.addDocument(doc);
         }
         iw.commit();
@@ -85,7 +85,7 @@ public class RuntimeTest extends TestCase {
         IndexWriter iw = LuceneUtils.createIndexWriter(indexPath + "-small", true);
         long ms = System.currentTimeMillis();
         for (String identifier : testFiles) {
-            Document doc = builder.createDocument(new FileInputStream(testFilesPath + identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, testFilesPath + identifier, identifier);
             iw.addDocument(doc);
         }
         System.out.println("Time taken: " + ((System.currentTimeMillis() - ms) / testFiles.length) + " ms");
@@ -103,7 +103,7 @@ public class RuntimeTest extends TestCase {
         long ms = System.currentTimeMillis();
         for (String identifier : images) {
             try {
-                Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
+                Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
                 iw.addDocument(doc);
             } catch (Exception e) {
                 System.err.print("\n ;-( ");//e.printStackTrace();
@@ -127,8 +127,7 @@ public class RuntimeTest extends TestCase {
 
         // This is the old and slow one.
 //        ImageSearcher searcher = ImageSearcherFactory.createCEDDImageSearcher(30);
-        FileInputStream imageStream = new FileInputStream("wang-1000/0.jpg");
-        BufferedImage bimg = ImageIO.read(imageStream);
+        BufferedImage bimg = ImageIO.read(new File("wang-1000/0.jpg"));
         ImageSearchHits hits = null;
         long time = System.currentTimeMillis();
         for (int i = 0; i < numsearches; i++) {
@@ -181,7 +180,7 @@ public class RuntimeTest extends TestCase {
         int count = 0;
         long time = System.currentTimeMillis();
         for (String identifier : images) {
-            Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
             iw.addDocument(doc);
             count++;
             if (count % 100 == 0) System.out.print((100 * count) / images.size() + "% ");

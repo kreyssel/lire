@@ -31,6 +31,7 @@ package net.semanticmetadata.lire.imageanalysis.sift;
 
 import junit.framework.TestCase;
 import net.semanticmetadata.lire.DocumentBuilderFactory;
+import net.semanticmetadata.lire.DocumentBuilderUtils;
 import net.semanticmetadata.lire.clustering.Cluster;
 import net.semanticmetadata.lire.clustering.KMeans;
 import net.semanticmetadata.lire.imageanalysis.bovw.SiftFeatureHistogramBuilder;
@@ -142,7 +143,7 @@ public class TestLocalFeatureHistogram extends TestCase {
         for (int i = 0; i < images.size(); i++) {
 //            int sampleQuery = sampleQueries[i];
 //            String s = testExtensive + "/" + sampleQuery + ".jpg";
-            iw.addDocument(db.createDocument(new FileInputStream(images.get(i)), images.get(i)));
+            iw.addDocument(DocumentBuilderUtils.createDocument(db, images.get(i), images.get(i)));
             if (i % 100 == 99) System.out.print(".");
             if (i % 1000 == 999) System.out.print(" ~ " + i + " files indexed\n");
             if (i > 1000) break;
@@ -159,7 +160,7 @@ public class TestLocalFeatureHistogram extends TestCase {
         for (int i = 0; i < images.size(); i++) {
 //            int sampleQuery = sampleQueries[i];
 //            String s = testExtensive + "/" + sampleQuery + ".jpg";
-            iw.addDocument(db.createDocument(new FileInputStream(images.get(i)), images.get(i)));
+            iw.addDocument(DocumentBuilderUtils.createDocument(db, images.get(i), images.get(i)));
             if (i % 100 == 99) System.out.print(".");
             if (i % 1000 == 999) System.out.print(" ~ " + i + " files indexed\n");
             if (i > 1000) break;

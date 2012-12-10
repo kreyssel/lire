@@ -16,7 +16,7 @@
   ~
   ~ We kindly ask you to refer the following paper in any publication mentioning Lire:
   ~
-  ~ Lux Mathias, Savvas A. Chatzichristofis. Lire: Lucene Image Retrieval –
+  ~ Lux Mathias, Savvas A. Chatzichristofis. Lire: Lucene Image Retrieval
   ~ An Extensible Java CBIR Library. In proceedings of the 16th ACM International
   ~ Conference on Multimedia, pp. 1085-1088, Vancouver, Canada, 2008
   ~
@@ -51,10 +51,15 @@ an index like this:
     int count = 0;
     long time = System.currentTimeMillis();
     for (String identifier : images) {
-        Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
-        iw.addDocument(doc);
-        count ++;
-        if (count % 25 == 0) System.out.println(count + " files indexed.");
+    	FileInputStream in = new FileInputStream(identifier);
+    	try {
+        	Document doc = builder.createDocument(in, identifier);
+        	iw.addDocument(doc);
+        	count ++;
+        	if (count % 25 == 0) System.out.println(count + " files indexed.");
+        } finally {
+        	in.close();
+		}
     }
     long timeTaken = (System.currentTimeMillis() - time);
     float sec = ((float) timeTaken) / 1000f;

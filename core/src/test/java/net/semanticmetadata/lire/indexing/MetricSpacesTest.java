@@ -166,7 +166,7 @@ public class MetricSpacesTest extends TestCase {
         MetricSpacesInvertedListIndexing.numReferenceObjectsUsed = 10;
         MetricSpacesInvertedListIndexing.numReferenceObjects = 50;
 
-        TopDocs docs = ms.search(ImageIO.read(new FileInputStream("wang-data-1000/10.jpg")), smallIdx);
+        TopDocs docs = ms.search(ImageIO.read(new File("wang-data-1000/10.jpg")), smallIdx);
         IndexReader ir = IndexReader.open(FSDirectory.open(new File(smallIdx)));
         for (int i = 0; i < docs.scoreDocs.length; i++) {
             ScoreDoc scoreDoc = docs.scoreDocs[i];

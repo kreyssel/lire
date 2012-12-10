@@ -113,7 +113,7 @@ public class FilterTest extends TestCase {
         Document document = null;
         for (Iterator<String> iterator = allImages.iterator(); iterator.hasNext(); ) {
             String filename = iterator.next();
-            BufferedImage image = ImageIO.read(new FileInputStream(filename));
+            BufferedImage image = ImageIO.read(new File(filename));
             document = builder.createDocument(image, filename);
             iw.addDocument(document);
             count++;

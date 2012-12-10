@@ -198,9 +198,14 @@ public class ImageFunctions {
 //                IndexWriter iw = new IndexWriter(FSDirectory.open(new File(path)), new SimpleAnalyzer(), true, IndexWriter.MaxFieldLength.UNLIMITED);
                 DocumentBuilder builder = DocumentBuilderFactory.getFullDocumentBuilder();
                 for (String identifier : images) {
-                    Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
-                    iw.addDocument(doc);
-                    count++;
+                	FileInputStream in = new FileInputStream(identifier);
+                	try {
+                		Document doc = builder.createDocument(in, identifier);
+                		iw.addDocument(doc);
+                		count++;
+                	} finally {
+                		in.close();
+                	}
                 }
                 iw.commit();
                 iw.close();

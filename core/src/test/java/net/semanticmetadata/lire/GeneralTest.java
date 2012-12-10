@@ -72,7 +72,7 @@ public class GeneralTest extends TestCase {
             LireFeature lireFeature = (LireFeature) c.newInstance();
             LireFeature tmpLireFeature = (LireFeature) c.newInstance();
             for (String file : testFiles) {
-                lireFeature.extract(ImageIO.read(new FileInputStream(testFilesPath + file)));
+                lireFeature.extract(ImageIO.read(new File(testFilesPath + file)));
                 float delta = 0.0000f;
                 assertEquals(lireFeature.getDistance(lireFeature), 0, delta);
 //                tmpLireFeature.setStringRepresentation(lireFeature.getStringRepresentation());
@@ -91,7 +91,7 @@ public class GeneralTest extends TestCase {
             // create an index with a specific builder:
             IndexWriter iw = LuceneUtils.createIndexWriter(indexPath + "-small", true);
             for (String identifier : testFiles) {
-                Document doc = b.createDocument(new FileInputStream(testFilesPath + identifier), identifier);
+                Document doc = DocumentBuilderUtils.createDocument(b, testFilesPath + identifier, identifier);
                 iw.addDocument(doc);
             }
             iw.close();
@@ -131,7 +131,7 @@ public class GeneralTest extends TestCase {
                 System.out.println(count + " files indexed. " + (System.currentTimeMillis() - ms) / (count) + " ms per file");
             }
             String file = iterator.next();
-            iw.addDocument(builder.createDocument(new FileInputStream(file), file));
+            iw.addDocument(DocumentBuilderUtils.createDocument(builder, file, file));
         }
         iw.close();
     }

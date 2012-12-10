@@ -46,8 +46,7 @@ import java.util.Set;
  * <pre>
  * IndexReader reader = IndexReader.open(indexPath);
  * ImageSearcher searcher = ImageSearcherFactory.createDefaultSearcher();
- * FileInputStream imageStream = new FileInputStream("image.jpg");
- * BufferedImage bimg = ImageIO.read(imageStream);
+ * BufferedImage bimg = ImageIO.read(new File("image.jpg"));
  * // searching for an image:
  * ImageSearchHits hits = null;
  * hits = searcher.search(bimg, reader);
@@ -93,7 +92,7 @@ public interface ImageSearcher {
     /**
      * Searches for images similar to the given image.
      *
-     * @param image  the example image to search for.
+     * @param image  the example image to search for. The stream will not been closed.
      * @param reader the IndexReader which is used to dsearch through the images.
      * @return a sorted list of hits.
      * @throws IOException in case the image could not be read from stream.

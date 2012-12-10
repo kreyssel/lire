@@ -48,7 +48,7 @@ public class DocumentBuilderFactoryTest extends TestCase {
         assertNotNull(builder);
         try {
             String identifier = "img01.JPG";
-            Document doc = builder.createDocument(new FileInputStream("./src/test/resources/images/img01.JPG"), identifier);
+            Document doc = DocumentBuilderUtils.createDocument(builder, "./src/test/resources/images/img01.JPG", identifier);
             assertNotNull(doc);
             assertEquals(identifier, doc.getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0]);
         } catch (IOException e) {

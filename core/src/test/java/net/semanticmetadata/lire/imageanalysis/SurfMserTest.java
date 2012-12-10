@@ -35,6 +35,8 @@ import com.stromberglabs.jopensurf.Surf;
 import junit.framework.TestCase;
 
 import javax.imageio.ImageIO;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
@@ -48,8 +50,8 @@ import java.util.List;
 public class SurfMserTest extends TestCase {
 
     public void testExtract() throws IOException {
-        Surf sm = new Surf(ImageIO.read(new FileInputStream("wang-1000/0.jpg")));
-//        Surf sm = new SurfMser(ImageIO.read(new FileInputStream("wang-1000/0.jpg")));
+        Surf sm = new Surf(ImageIO.read(new File("wang-1000/0.jpg")));
+//        Surf sm = new SurfMser(ImageIO.read(new File("wang-1000/0.jpg")));
         List<SURFInterestPoint> pts = sm.getFreeOrientedInterestPoints();
         for (Iterator<SURFInterestPoint> surfInterestPointIterator = pts.iterator(); surfInterestPointIterator.hasNext(); ) {
             SURFInterestPoint pt = surfInterestPointIterator.next();

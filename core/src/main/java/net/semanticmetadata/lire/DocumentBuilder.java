@@ -51,7 +51,7 @@ import java.io.InputStream;
  * int count = 0;
  * long time = System.currentTimeMillis();
  * for (String identifier : images) {
- * Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
+ * Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
  * iw.addDocument(doc);
  * count ++;
  * if (count % 25 == 0) System.out.println(count + " files indexed.");
@@ -114,7 +114,7 @@ public interface DocumentBuilder {
      * Creates a new Lucene document from an InputStream. The identifier can be used like an id
      * (e.g. the file name or the url of the image)
      *
-     * @param image      the image to index. Cannot be NULL.
+     * @param image      the image to index. Cannot be NULL. The stream will not been closed.
      * @param identifier an id for the image, for instance the filename or an URL. Can be NULL.
      * @return a Lucene Document containing the indexed image.
      * @throws IOException in case the image cannot be retrieved from the InputStream
