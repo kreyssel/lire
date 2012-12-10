@@ -35,7 +35,7 @@ public class VisualWordsTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        indexPath = new File("index-bow");
+        indexPath = new File("target/testout/index-bow");
         surfBuilder = new SurfDocumentBuilder();
         siftBuilder = new SiftDocumentBuilder();
     }
@@ -91,7 +91,7 @@ public class VisualWordsTest extends TestCase {
         IndexWriter iw = new IndexWriter(FSDirectory.open(indexPath), conf);
         long ms = System.currentTimeMillis();
         int count = 0;
-        ArrayList<File> files = FileUtils.getAllImageFiles(new File("testdata\\ferrari"), true);
+        ArrayList<File> files = FileUtils.getAllImageFiles(new File("testdata/ferrari"), true);
         for (Iterator<File> i = files.iterator(); i.hasNext(); ) {
             File imgFile = i.next();
             iw.addDocument(siftBuilder.createDocument(
