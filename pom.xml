@@ -30,6 +30,9 @@
 	</modules>
 
 	<properties>
+		<!-- sources are in cp1252 encoding -->
+		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+	
 		<lucene.version>4.0.0</lucene.version>
 	</properties>
 
