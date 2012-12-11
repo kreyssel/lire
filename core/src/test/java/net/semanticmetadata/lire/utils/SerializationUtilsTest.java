@@ -99,9 +99,9 @@ public class SerializationUtilsTest extends TestCase {
             tc[i] = new Cluster(test);
         }
 
-        Cluster.writeClusters(tc, "test-tmp.dat");
+        Cluster.writeClusters(tc, "target/testout/test-tmp.dat");
 
-        Cluster[] clusters = Cluster.readClusters("test-tmp.dat");
+        Cluster[] clusters = Cluster.readClusters("target/testout/test-tmp.dat");
 
         for (int i = 0; i < clusters.length; i++) {
             System.out.println(clusters[i].toString().equals(tc[i].toString()));

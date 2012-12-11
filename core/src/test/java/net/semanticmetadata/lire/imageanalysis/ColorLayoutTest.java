@@ -44,7 +44,7 @@ import java.io.IOException;
  */
 public class ColorLayoutTest extends TestCase {
     public void testExtraction() throws IOException {
-        BufferedImage bi = ImageIO.read(new File(".\\src\\test\\resources\\images\\img01.JPG"));
+        BufferedImage bi = ImageIO.read(new File("./src/test/resources/images/img01.JPG"));
         ColorLayout cl = new ColorLayout();
         cl.extract(bi);
 

@@ -29,7 +29,7 @@ import java.util.Iterator;
  */
 public class VisualWordsTest extends TestCase {
     private static File indexPath;
-    String queryImage = "testdata/flickr-10000/3544790945_38c07af051_o.jpg";
+    String queryImage = "./src/test/resources/flickrphotos/8260717479_9fe0a3e741_b.jpg";
     private DocumentBuilder surfBuilder, siftBuilder;
 
     @Override
@@ -46,7 +46,7 @@ public class VisualWordsTest extends TestCase {
         IndexWriter iw = new IndexWriter(FSDirectory.open(indexPath), conf);
         long ms = System.currentTimeMillis();
         int count = 0;
-        ArrayList<File> files = FileUtils.getAllImageFiles(new File("testdata/flickr-10000"), true);
+        ArrayList<File> files = FileUtils.getAllImageFiles(new File("src/test/resources/flickrphotos"), true);
         for (Iterator<File> i = files.iterator(); i.hasNext(); ) {
             File imgFile = i.next();
             iw.addDocument(surfBuilder.createDocument(
@@ -91,11 +91,9 @@ public class VisualWordsTest extends TestCase {
         IndexWriter iw = new IndexWriter(FSDirectory.open(indexPath), conf);
         long ms = System.currentTimeMillis();
         int count = 0;
-        ArrayList<File> files = FileUtils.getAllImageFiles(new File("testdata/ferrari"), true);
-        for (Iterator<File> i = files.iterator(); i.hasNext(); ) {
-            File imgFile = i.next();
-            iw.addDocument(siftBuilder.createDocument(
-                    ImageIO.read(imgFile), imgFile.getPath()));
+        ArrayList<File> files = FileUtils.getAllImageFiles(new File("src/test/resources/ferrari"), true);
+        for (File imgFile : files) {
+            iw.addDocument(siftBuilder.createDocument(ImageIO.read(imgFile), imgFile.getPath()));
             count++;
             if (count > 100 && count % 500 == 0) {
                 System.out.println(count + " files indexed. " + (System.currentTimeMillis() - ms) / (count) + " ms per file");
@@ -103,6 +101,7 @@ public class VisualWordsTest extends TestCase {
 
         }
         iw.close();
+        
         IndexReader ir = DirectoryReader.open(FSDirectory.open(indexPath));
         SiftFeatureHistogramBuilder sfh = new SiftFeatureHistogramBuilder(ir, 1000, 500);
         sfh.index();

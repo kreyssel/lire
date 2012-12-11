@@ -61,16 +61,18 @@ public class FileUtils {
     public static ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) throws IOException {
         ArrayList<String> resultList = new ArrayList<String>(256);
         File[] f = directory.listFiles();
-        for (File file : f) {
-            if (file != null && (file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png")) && !file.getName().startsWith("tn_")) {
-                resultList.add(file.getCanonicalPath());
-            }
-            if (descendIntoSubDirectories && file.isDirectory()) {
-                ArrayList<String> tmp = getAllImages(file, true);
-                if (tmp != null) {
-                    resultList.addAll(tmp);
-                }
-            }
+        if(f != null) {
+	        for (File file : f) {
+	            if (file != null && (file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png")) && !file.getName().startsWith("tn_")) {
+	                resultList.add(file.getCanonicalPath());
+	            }
+	            if (descendIntoSubDirectories && file.isDirectory()) {
+	                ArrayList<String> tmp = getAllImages(file, true);
+	                if (tmp != null) {
+	                    resultList.addAll(tmp);
+	                }
+	            }
+	        }
         }
         if (resultList.size() > 0)
             return resultList;
@@ -89,16 +91,18 @@ public class FileUtils {
     public static ArrayList<File> getAllImageFiles(File directory, boolean descendIntoSubDirectories) throws IOException {
         ArrayList<File> resultList = new ArrayList<File>(256);
         File[] f = directory.listFiles();
-        for (File file : f) {
-            if (file != null && (file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png")) && !file.getName().startsWith("tn_")) {
-                resultList.add(file);
-            }
-            if (descendIntoSubDirectories && file.isDirectory()) {
-                ArrayList<File> tmp = getAllImageFiles(file, true);
-                if (tmp != null) {
-                    resultList.addAll(tmp);
-                }
-            }
+        if(f != null) {
+	        for (File file : f) {
+	            if (file != null && (file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png")) && !file.getName().startsWith("tn_")) {
+	                resultList.add(file);
+	            }
+	            if (descendIntoSubDirectories && file.isDirectory()) {
+	                ArrayList<File> tmp = getAllImageFiles(file, true);
+	                if (tmp != null) {
+	                    resultList.addAll(tmp);
+	                }
+	            }
+	        }
         }
         if (resultList.size() > 0)
             return resultList;

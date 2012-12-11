@@ -42,7 +42,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class GeneralInvertedListTest extends TestCase {
-    private String indexPath = "./test-index-cedd-flickr";
+    private String indexPath = "./target/testout/test-index-cedd-flickr";
     private int numRefObjsReferenced = 50;
     private int numRefObjs = 500;
 

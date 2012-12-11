@@ -58,7 +58,7 @@ import java.util.Iterator;
  */
 public class FilterTest extends TestCase {
 
-    private String indexPath = "test-filters";
+    private String indexPath = "target/testout/test-filters";
 
     private DocumentBuilder getDocumentBuilder() {
         ChainedDocumentBuilder builder = new ChainedDocumentBuilder();

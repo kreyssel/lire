@@ -29,7 +29,7 @@ import java.util.*;
  */
 public class LocalitySensitiveHashingTest extends TestCase {
     String testExtensive = "./wang-1000";
-    private String indexPath = "index-hashed";
+    private String indexPath = "target/testout/index-hashed";
     private int numImagesEval = 50;
 
     public double testIndexing() throws IOException, IllegalAccessException, InstantiationException {

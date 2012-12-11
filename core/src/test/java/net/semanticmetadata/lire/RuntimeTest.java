@@ -39,6 +39,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.FSDirectory;
+import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -56,10 +57,10 @@ import java.util.ArrayList;
  */
 public class RuntimeTest extends TestCase {
     private String[] testFiles = new String[]{"img01.JPG", "img02.JPG", "img03.JPG", "img04.JPG", "img05.JPG",
-            "img06.JPG", "img07.JPG", "img08.JPG", "img08a.JPG", "error.jpg", "P�ginas de 060305_b_P�gina_1_Imagem_0004_P�gina_08_Imagem_0002.jpg"};
-    private String testFilesPath = "./lire/src/test/resources/images/";
-    private String indexPath = "test-index";
-    private String testExtensive = "./lire/wang-data-1000";
+            "img06.JPG", "img07.JPG", "img08.JPG", "img08a.JPG", "error.jpg"};//, "P�ginas de 060305_b_P�gina_1_Imagem_0004_P�gina_08_Imagem_0002.jpg"};
+    private String testFilesPath = "./src/test/resources/images/";
+    private String indexPath = "./target/testout/test-index";
+    private String testExtensive = "./wang-data-1000";
 
     public void testCreateIndex() throws IOException {
         ChainedDocumentBuilder builder = new ChainedDocumentBuilder();
@@ -79,7 +80,7 @@ public class RuntimeTest extends TestCase {
 
     public void testCreateCorrelogramIndex() throws IOException {
         String[] testFiles = new String[]{"img01.jpg", "img02.jpg", "img03.jpg", "img04.jpg", "img05.jpg", "img06.jpg", "img07.jpg", "img08.jpg", "img09.jpg", "img10.jpg"};
-        String testFilesPath = "./lire/src/test/resources/small/";
+        String testFilesPath = "./src/test/resources/small/";
 
         DocumentBuilder builder = DocumentBuilderFactory.getAutoColorCorrelogramDocumentBuilder();
         IndexWriter iw = LuceneUtils.createIndexWriter(indexPath + "-small", true);
@@ -94,7 +95,7 @@ public class RuntimeTest extends TestCase {
     }
 
     public void testCreateCEDDIndex() throws IOException {
-        ArrayList<String> images = FileUtils.getAllImages(new File("c:/temp/flickrphotos"), true);
+        ArrayList<String> images = FileUtils.getAllImages(new File("./src/test/resources/flickr-1000"), true);
 
         ChainedDocumentBuilder builder = new ChainedDocumentBuilder();
         builder.addBuilder(DocumentBuilderFactory.getCEDDDocumentBuilder());
@@ -115,10 +116,10 @@ public class RuntimeTest extends TestCase {
         iw.commit();
         iw.close();
     }
-
+    
     public void testCEDDSearch() throws IOException {
         int numsearches = 10;
-        IndexReader reader = DirectoryReader.open(FSDirectory.open(new File("test-index-cedd")));
+        IndexReader reader = DirectoryReader.open(FSDirectory.open(new File(indexPath + "-cedd")));
         int numDocs = reader.numDocs();
         System.out.println("numDocs = " + numDocs);
 

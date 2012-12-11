@@ -63,7 +63,7 @@ import java.util.Iterator;
  */
 public class TestGeneral extends TestCase {
     // check if this directory exists!!
-    public String testIndex = "./temp/generaltestindex";
+    public String testIndex = "target/benchmark/generaltestindex";
     //    public String testFiles = "C:\\Temp\\...\\images\\indexsrc\\default\\original";
     public String testFiles = "C:\\Temp\\...\\images\\indexsrc\\...";
 

@@ -59,7 +59,7 @@ import java.util.logging.Logger;
 public class FlickrIndexingThread extends Thread {
     LireDemoFrame parent;
     public static final String cacheDirectory = "./flickrphotos/";
-    private int numberOfPhotosToIndex = 100;
+    private int numberOfPhotosToIndex = 10000;
 
     /**
      * Creates a new instance of FlickrIndexingThread

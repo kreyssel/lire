@@ -52,8 +52,8 @@ import java.io.*;
 public class TestImageSearcher extends TestCase {
     private String[] testFiles = new String[]{"img01.JPG", "img02.JPG", "img03.JPG", "img04.JPG", "img05.JPG",
             "img06.JPG", "img07.JPG", "img08.JPG", "img08a.JPG"};
-    private String testFilesPath = "src/test/resources/images/";
-    private String indexPath = "test-index-small";
+    private String testFilesPath = "./src/test/resources/images/";
+    private String indexPath = "./target/testout/test-index-small";
     private int numsearches = 25;
 
     private DocumentBuilder getDocumentBuilder() {
@@ -217,7 +217,7 @@ public class TestImageSearcher extends TestCase {
     public void testMSERHistogramSearcher() throws IOException {
         String query = "312.jpg";
         VisualWordsImageSearcher searcher = new VisualWordsImageSearcher(25, DocumentBuilder.FIELD_NAME_MSER_LOCAL_FEATURE_HISTOGRAM_VISUAL_WORDS);
-        IndexReader reader = DirectoryReader.open(FSDirectory.open(new File("wang-index")));
+        IndexReader reader = DirectoryReader.open(FSDirectory.open(new File("target/testout/wang-index")));
         ImageSearchHits hits = searcher.search(findDoc(reader, query), reader);
         saveToHtml("mser", hits, query);
     }

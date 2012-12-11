@@ -55,7 +55,7 @@ import java.util.ArrayList;
 public class TestPascalVOC2007 extends TestCase {
     private ChainedDocumentBuilder builder;
     private String testExtensive = "VOC2007/JPEGImages";
-    private String indexPath = "./pascal-map-test";
+    private String indexPath = "target/benchmark/pascal-map-test";
 
     public void setUp() {
         // Setting up DocumentBuilder:

@@ -48,7 +48,7 @@ import java.io.*;
  * Time: 15:07:43
  */
 public class MetricSpacesTest extends TestCase {
-    String indexPath = "./test-index-cedd-flickr";
+    String indexPath = "./target/testout/test-index-cedd-flickr";
     // String imagePath = "";
 
     public void testIndexing() throws IOException {

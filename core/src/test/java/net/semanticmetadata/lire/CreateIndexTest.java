@@ -38,7 +38,6 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -56,7 +55,7 @@ public class CreateIndexTest extends TestCase {
     private String[] testFiles = new String[]{"img01.JPG", "img02.JPG", "img03.JPG", "img04.JPG", "img05.JPG",
             "img06.JPG", "img07.JPG", "img08.JPG", "img08a.JPG", "error.jpg"};
     private String testFilesPath = "./src/test/resources/images/";
-    private String indexPath = "test-index";
+    private String indexPath = "./target/testout/test-index";
     private String testExtensive = "./wang-1000";
 
     private DocumentBuilder getDocumentBuilder() {

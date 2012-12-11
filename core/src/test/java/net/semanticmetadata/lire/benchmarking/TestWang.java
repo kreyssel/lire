@@ -70,7 +70,7 @@ import java.util.regex.Pattern;
  * @author Mathias Lux, mathias@juggle.at
  */
 public class TestWang extends TestCase {
-    private String indexPath = "wang-index";
+    private String indexPath = "target/benchmark/wang-index";
     // if you don't have the images you can get them here: http://wang.ist.psu.edu/docs/related.shtml
     private String testExtensive = "./wang-1000";
     private ChainedDocumentBuilder builder;

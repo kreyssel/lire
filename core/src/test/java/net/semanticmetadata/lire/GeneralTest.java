@@ -31,7 +31,7 @@ public class GeneralTest extends TestCase {
             "img01.JPG", "img02.JPG", "img03.JPG", "img04.JPG", "img05.JPG",
             "img06.JPG", "img07.JPG", "img08.JPG", "error.jpg"};
     private String testFilesPath = "./src/test/resources/images/";
-    private String indexPath = "test-index";
+    private String indexPath = "./target/testout/test-index";
     private String testExtensive = "./wang-1000";
     private Class[] featureClasses = new Class[]{
             CEDD.class, FCTH.class, JCD.class, AutoColorCorrelogram.class, ColorLayout.class, EdgeHistogram.class,
@@ -116,8 +116,8 @@ public class GeneralTest extends TestCase {
     }
 
     public void testIndexLarge() throws IOException {
-        ArrayList<String> images = FileUtils.getAllImages(new File("C:\\Java\\Projects\\LireSVN\\testdata\\flickr-10000"), false);
-        IndexWriter iw = LuceneUtils.createIndexWriter("index-large", true, LuceneUtils.AnalyzerType.WhitespaceAnalyzer);
+        ArrayList<String> images = FileUtils.getAllImages(new File("src/test/resources/flickr-10000"), false);
+        IndexWriter iw = LuceneUtils.createIndexWriter("./target/testout/index-large", true, LuceneUtils.AnalyzerType.WhitespaceAnalyzer);
         // select one feature for the large index:
         int featureIndex = 4;
         int count = 0;

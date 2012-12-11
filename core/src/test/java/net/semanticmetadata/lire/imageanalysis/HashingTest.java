@@ -92,23 +92,26 @@ public class HashingTest extends TestCase {
     }
 
     public void testOutputHashFunction() throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("hashFunctions.obj"));
-        oos.writeInt(bits);
-        oos.writeInt(dimensions);
-        oos.writeInt(numFunctionBundles);
-        for (int c = 0; c < numFunctionBundles; c++) {
-            for (int i = 0; i < bits; i++) {
-                float[] hashPlane = hashPlanes[i];
-                for (int j = 0; j < dimensions; j++) {
-                    oos.writeFloat((float) (Math.random() * 8d - 4d));
-                }
-            }
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("target/testout/hashFunctions.obj"));
+        try { 
+	        oos.writeInt(bits);
+	        oos.writeInt(dimensions);
+	        oos.writeInt(numFunctionBundles);
+	        for (int c = 0; c < numFunctionBundles; c++) {
+	            for (int i = 0; i < bits; i++) {
+	                float[] hashPlane = hashPlanes[i];
+	                for (int j = 0; j < dimensions; j++) {
+	                    oos.writeFloat((float) (Math.random() * 8d - 4d));
+	                }
+	            }
+	        }
+        } finally {
+        	oos.close();
         }
-        oos.close();
     }
 
     public void testReadHashFunctions() throws IOException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("hashFunctions.obj"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("target/testout/hashFunctions.obj"));
         try { 
 	        int bits = ois.readInt();
 	        int dimensions = ois.readInt();
