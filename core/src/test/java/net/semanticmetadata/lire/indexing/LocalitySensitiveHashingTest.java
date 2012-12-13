@@ -28,8 +28,8 @@ import java.util.*;
  *         Created: 04.06.12, 14:19
  */
 public class LocalitySensitiveHashingTest extends TestCase {
-    String testExtensive = "./wang-1000";
-    private String indexPath = "target/testout/index-hashed";
+    String testExtensive = "./testdata/wang-1000";
+    private String indexPath = "index-hashed";
     private int numImagesEval = 50;
 
     public double testIndexing() throws IOException, IllegalAccessException, InstantiationException {
@@ -47,7 +47,7 @@ public class LocalitySensitiveHashingTest extends TestCase {
         long time = System.currentTimeMillis();
         for (String identifier : images) {
             CEDD cedd = new CEDD();
-            cedd.extract(ImageIO.read(new File(identifier)));
+            cedd.extract(ImageIO.read(new FileInputStream(identifier)));
             Document doc = new Document();
             doc.add(new Field(DocumentBuilder.FIELD_NAME_CEDD, cedd.getByteArrayRepresentation()));
             doc.add(new Field(DocumentBuilder.FIELD_NAME_IDENTIFIER, identifier, Field.Store.YES, Field.Index.NOT_ANALYZED));

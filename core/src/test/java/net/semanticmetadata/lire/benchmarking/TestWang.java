@@ -31,11 +31,7 @@
 package net.semanticmetadata.lire.benchmarking;
 
 import junit.framework.TestCase;
-import net.semanticmetadata.lire.DocumentBuilder;
-import net.semanticmetadata.lire.DocumentBuilderUtils;
-import net.semanticmetadata.lire.ImageSearchHits;
-import net.semanticmetadata.lire.ImageSearcher;
-import net.semanticmetadata.lire.ImageSearcherFactory;
+import net.semanticmetadata.lire.*;
 import net.semanticmetadata.lire.imageanalysis.CEDD;
 import net.semanticmetadata.lire.imageanalysis.FCTH;
 import net.semanticmetadata.lire.imageanalysis.JCD;
@@ -56,11 +52,12 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Bits;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.ProgressMonitor;
 
 /**
  * ...
@@ -70,7 +67,7 @@ import java.util.regex.Pattern;
  * @author Mathias Lux, mathias@juggle.at
  */
 public class TestWang extends TestCase {
-    private String indexPath = "target/benchmark/wang-index";
+    private String indexPath = "wang-index";
     // if you don't have the images you can get them here: http://wang.ist.psu.edu/docs/related.shtml
     private String testExtensive = "./wang-1000";
     private ChainedDocumentBuilder builder;
@@ -160,7 +157,7 @@ public class TestWang extends TestCase {
         int count = 0;
         long time = System.currentTimeMillis();
         for (String identifier : images) {
-            Document doc = DocumentBuilderUtils.createDocument(builder, identifier, identifier);
+            Document doc = builder.createDocument(new FileInputStream(identifier), identifier);
             iw.addDocument(doc);
             count++;
             if (count % 100 == 0) System.out.println(count + " files indexed.");
