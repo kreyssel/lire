@@ -32,7 +32,7 @@
 	<properties>
 		<!-- sources are in cp1252 encoding -->
 		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
-	
+
 		<lucene.version>4.0.0</lucene.version>
 	</properties>
 
@@ -69,7 +69,7 @@
 			<dependency>
 				<groupId>com.drewnoakes</groupId>
 				<artifactId>metadata-extractor</artifactId>
-				<!-- version>2.6.2</version-->
+				<!-- version>2.6.2</version -->
 				<version>2.4.0-beta-1</version>
 			</dependency>
 
@@ -103,5 +103,39 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>cloudbees-forge-release</id>
+			<url>https://repository-kreyssel-ae.forge.cloudbees.com/release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>cloudbees-forge-snapshot</id>
+			<url>https://repository-kreyssel-ae.forge.cloudbees.com/snapshot/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>cloudbees-forge-release</id>
+			<url>https://repository-kreyssel-ae.forge.cloudbees.com/release/</url>
+		</repository>
+		<snapshotRepository>
+			<id>cloudbees-forge-snapshot</id>
+			<url>https://repository-kreyssel-ae.forge.cloudbees.com/snapshot/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
